@@ -1,0 +1,11 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "REST API for the movie recommendation system"
+authors = [
+    { name = "Tiberius Gherac", email = "tiberius.gherac@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.3",
+]
