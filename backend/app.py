@@ -1,9 +1,8 @@
 from pathlib import Path
 from flask import Flask
-from data_parser import load_ratings
+from data_parser import ratings, users, movies
 
-test = load_ratings()
-print(test)
+print(movies)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
