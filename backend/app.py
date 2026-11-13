@@ -31,7 +31,7 @@ def get_recommendations(user_id):
 
     results = []
     for score, movie_id in recommended_movies:
-        movie = {"movie_id": movie_id, "movie_name": movies[movie_id], "extimated_score": score}
+        movie = {"movie_id": movie_id, "movie_name": movies[movie_id], "estimated_score": score}
         results.append(movie)
 
     return jsonify(results)
