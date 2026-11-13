@@ -1,4 +1,3 @@
-from data_parser import ratings, movies
 from euclidean import users_similarity
 
 def recommendations(user_id, ratings, movies):
