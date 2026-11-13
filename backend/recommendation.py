@@ -12,7 +12,7 @@ def recommendations(user_id, ratings, movies):
         weighted_sum = 0
         similarity_sum = 0
 
-        for other_user_id, similarity in similarities:
+        for similarity, other_user_id in similarities:
             # Skip users who can't help
             if similarity <= 0:
                 continue
