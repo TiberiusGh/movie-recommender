@@ -1,8 +1,10 @@
 from pathlib import Path
 from flask import Flask
 from data_parser import ratings, users, movies
+from recommendation import recommendations
 
-print(movies)
+test = recommendations(3, ratings, movies)
+print(test)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -17,3 +19,4 @@ def index():
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)
+
