@@ -2,6 +2,7 @@ from pathlib import Path
 from flask import Flask, jsonify
 from data_parser import ratings, users, movies
 from recommendation import recommendations
+from euclidean import users_similarity
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -35,6 +36,18 @@ def get_recommendations(user_id):
 
     return jsonify(results)
 
+@app.route("/api/users/<user_id>/similarusers")
+def get_similar_users(user_id):
+    int_userID = int(user_id)
+
+    similar_users_lst = users_similarity(int_userID, ratings)
+
+    results = []
+    for similarity_score, user_id in similar_users_lst:
+        result = {"similarity_score": similarity_score, "user_id": user_id, "user_name": users[user_id] }
+        results.append(result)
+
+    return jsonify(results)
 
 
 if __name__ == "__main__":
