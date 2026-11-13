@@ -26,6 +26,6 @@ def users_similarity(user_id, ratings):
         similarity_score = euclidean_alg(ratings[user_id], ratings[curr_userID])
         similarities.append((similarity_score, curr_userID))
 
-        sorted_lst = sorted(similarities, reverse=True)
+    sorted_lst = sorted(similarities, reverse=True)
 
     return sorted_lst
