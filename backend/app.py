@@ -22,9 +22,21 @@ def get_users():
 
     return jsonify(user_lst)
 
+@app.route("/api/users/<user_id>/recommendations")
+def get_recommendations(user_id):
+    int_userID = int(user_id)
+
+    recommended_movies = recommendations(int_userID, ratings, movies)
+
+    results = []
+    for score, movie_id in recommended_movies:
+        movie = {"movie_id": movie_id, "movie_name": movies[movie_id], "extimated_score": score}
+        results.append(movie)
+
+    return jsonify(results)
 
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host="127.0.0.1", port=5001, debug=True)
 
