@@ -4,10 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Recommendations</title>
-    <link rel="icon" type="image/svg+xml" href="https://tiberiusgh.com/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="96x96" href="https://tiberiusgh.com/favicon-96x96.png" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://tiberiusgh.com/favicon.svg"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="https://tiberiusgh.com/favicon-96x96.png"
+    />
     <link rel="shortcut icon" href="https://tiberiusgh.com/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://tiberiusgh.com/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://tiberiusgh.com/apple-touch-icon.png"
+    />
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <link rel="stylesheet" href="/styles.css" />
@@ -32,6 +45,13 @@
             <select id="user-select" required></select>
           </label>
           <label class="field">
+            <span class="field-label">Algorithm</span>
+            <select id="algorithm-select">
+              <option value="euclidean">Euclidean</option>
+              <option value="pearson">Pearson</option>
+            </select>
+          </label>
+          <label class="field">
             <span class="field-label">Results</span>
             <input id="result-count" type="number" min="1" value="3" required />
           </label>
@@ -45,7 +65,11 @@
           <h2 class="section-title">Recommended movies</h2>
           <table>
             <thead>
-              <tr><th>ID</th><th>Movie</th><th class="number">Score</th></tr>
+              <tr>
+                <th>ID</th>
+                <th>Movie</th>
+                <th class="number">Score</th>
+              </tr>
             </thead>
             <tbody id="recommendations-body"></tbody>
           </table>
@@ -54,7 +78,11 @@
           <h2 class="section-title">Similar users</h2>
           <table>
             <thead>
-              <tr><th>ID</th><th>Name</th><th class="number">Similarity</th></tr>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th class="number">Algorithm</th>
+              </tr>
             </thead>
             <tbody id="similar-users-body"></tbody>
           </table>

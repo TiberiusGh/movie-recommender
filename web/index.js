@@ -1,4 +1,5 @@
 const userSelect = document.getElementById('user-select')
+const algorithmSelect = document.getElementById('algorithm-select')
 const resultCountInput = document.getElementById('result-count')
 const searchForm = document.getElementById('search-form')
 const searchButton = searchForm.querySelector('button[type="submit"]')
@@ -62,6 +63,7 @@ function renderRecommendations(recommendations) {
 async function search(event) {
   event.preventDefault()
   const userId = userSelect.value
+  const algorithm = algorithmSelect.value
   const resultCount = Number(resultCountInput.value)
 
   searchButton.disabled = true
@@ -69,8 +71,8 @@ async function search(event) {
 
   try {
     const [similarUsers, recommendations] = await Promise.all([
-      fetchJson(`/api/users/${userId}/similarusers`),
-      fetchJson(`/api/users/${userId}/recommendations`)
+      fetchJson(`/api/users/${userId}/similarusers?algorithm=${algorithm}`),
+      fetchJson(`/api/users/${userId}/recommendations?algorithm=${algorithm}`)
     ])
     renderSimilarUsers(similarUsers.slice(0, resultCount))
     renderRecommendations(recommendations.slice(0, resultCount))
