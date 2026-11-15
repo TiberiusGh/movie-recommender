@@ -1,7 +1,5 @@
-from euclidean import users_similarity
-
-def recommendations(user_id, ratings, movies):
-    similarities = users_similarity(user_id, ratings)
+def recommendations(user_id, ratings, movies, algorithm):
+    similarities = users_similarity(user_id, ratings, algorithm)
     results = []
 
     for movieID in movies:
@@ -28,3 +26,18 @@ def recommendations(user_id, ratings, movies):
     
     results.sort(reverse=True)
     return results
+
+
+def users_similarity(user_id, ratings, algorithm):
+    similarities = []
+
+    for curr_userID in ratings:
+        if curr_userID == user_id:
+            continue
+
+        similarity_score = algorithm(ratings[user_id], ratings[curr_userID])
+        similarities.append((similarity_score, curr_userID))
+
+    sorted_lst = sorted(similarities, reverse=True)
+
+    return sorted_lst

@@ -13,19 +13,3 @@ def euclidean_alg(person_a, person_b):
         return 0
 
     return 1 / (1 + total) # adding one to the total prevents division by zero & caps the result at 1.0
-
-
-
-def users_similarity(user_id, ratings):
-    similarities = []
-
-    for curr_userID in ratings:
-        if curr_userID == user_id:
-            continue
-
-        similarity_score = euclidean_alg(ratings[user_id], ratings[curr_userID])
-        similarities.append((similarity_score, curr_userID))
-
-    sorted_lst = sorted(similarities, reverse=True)
-
-    return sorted_lst
