@@ -4,10 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Recommendations</title>
+    <link rel="icon" type="image/svg+xml" href="https://tiberiusgh.com/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="https://tiberiusgh.com/favicon-96x96.png" />
+    <link rel="shortcut icon" href="https://tiberiusgh.com/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://tiberiusgh.com/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <link rel="stylesheet" href="/styles.css" />
     <script src="/index.js" defer></script>
   </head>
   <body>
-    <h1>Movie Recommendations</h1>
+    <main>
+      <header class="hero">
+        <p class="hero-eyebrow">2DV515 · recommendation system</p>
+        <h1><span class="hero-greeting">Movie</span> recommendations.</h1>
+        <p class="hero-lead">
+          Pick a user to see who rates movies most like them, and which movies
+          they haven&rsquo;t seen yet are likely to be a good fit.
+        </p>
+      </header>
+
+      <section>
+        <h2 class="section-title">Search</h2>
+        <form id="search-form" class="controls">
+          <label class="field">
+            <span class="field-label">User</span>
+            <select id="user-select" required></select>
+          </label>
+          <label class="field">
+            <span class="field-label">Results</span>
+            <input id="result-count" type="number" min="1" value="3" required />
+          </label>
+          <button type="submit">Find recommendations</button>
+          <span id="status" class="status"></span>
+        </form>
+      </section>
+
+      <section id="results" class="results hidden">
+        <div>
+          <h2 class="section-title">Recommended movies</h2>
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Movie</th><th class="number">Score</th></tr>
+            </thead>
+            <tbody id="recommendations-body"></tbody>
+          </table>
+        </div>
+        <div>
+          <h2 class="section-title">Similar users</h2>
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Name</th><th class="number">Similarity</th></tr>
+            </thead>
+            <tbody id="similar-users-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>
+        <p>&copy; 2026 tiberius gherac</p>
+      </footer>
+    </main>
   </body>
 </html>
