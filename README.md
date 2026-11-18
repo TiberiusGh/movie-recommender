@@ -1,73 +1,57 @@
-# A1 - Recommendation System
+# Movie Recommender
 
-## Description
+A movie recommendation system based on user-based collaborative filtering. Pick a user and a similarity measure, and the app finds the most similar users and predicts which movies the selected user would rate highest.
 
-* In this assignment, you shall implement a recommendation system for the movie's data set.
-* You can use any programming language you like.
-* You shall present your application and code at an oral examination.
+Built as coursework for 2DV515 – Web Intelligence at Linnaeus University.
 
-## Submission instructions
+## Features
 
-See the [Deadlines and Submissions](https://coursepress.lnu.se/courses/web-intelligence/study-guide/deadlines-and-submissions) page.
+- **Similar users:** ranks every other user by how closely their ratings match the selected user.
+- **Recommendations:** predicts a score for each unseen movie as a similarity-weighted average of other users' ratings.
+- **Two similarity measures**, selectable from the GUI:
+  - **Euclidean distance:** similarity based on how far apart two users' ratings are on shared movies.
+  - **Pearson correlation:** similarity based on whether two users' ratings move together, which compensates for users who rate consistently high or low.
+- **REST API** with a static frontend served by the same Flask app.
 
-## Requirements
+## Tech stack
 
-<table>
-  <tr>
-    <th>Grade</th>
-    <th>Requirements</th>
-  </tr>
-  <tr>
-    <td>E</td>
-    <td>
-      <ul>
-        <li>Build a recommendation system that can find similar users and find recommendations for a user, using the <em>movies large</em> dataset (see <a href="https://coursepress.lnu.se/courses/web-intelligence/assignments/datasets">Datasets</a> page).</li>
-        <li>You can verify that your application works by using the example dataset from the lecture (see <a href="https://coursepress.lnu.se/courses/web-intelligence/assignments/datasets">Datasets</a> page).</li>
-        <li>Use Euclidean distance as the similarity measure.</li>
-        <li>Implement the system using a REST web service where:
-          <ol>
-            <li>client sends a request to a server</li>
-            <li>the server responds with <em>json</em> data</li>
-            <li>the <em>json</em> data is decoded and presented in a client GUI</li>
-          </ol>
-        </li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>C-D</td>
-    <td>
-    <ul>
-      <li>Implement the Pearson Correlation similarity measure.</li>
-      <li>It shall be possible to select which measure to use from the client GUI.</li>
-    </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>A-B</td>
-    <td>
-      <ul>
-        <li>Implement functionality for pre-generating an Item-Based Collaborative Filtering table by transforming the original data set.</li>
-        <li>Use the pre-generated table to implement a second way of finding recommendations for a user.</li>
-        <li>You shall only use Euclidean distance as the similarity measure.</li>
-        <li>It shall be possible to select how to find recommendations from the client GUI (Item-Based or User-Based).</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+- **Backend:** Python 3.13, Flask, Gunicorn, managed with [uv](https://docs.astral.sh/uv/)
+- **Frontend:** HTML, CSS and vanilla JavaScript
+- **Deployment:** Docker
 
-## Test cases – small example dataset
+## Running locally
 
-Here are some test cases for the small example dataset you can use to verify that your system works correctly.
+With uv:
 
-* Find recommended movies for user **Mike** using **Euclidean distance**:<br />![A1-small-Ex1.png](.readme/A1-small-Ex1.png)
-* Find recommended movies for user **Mike** using **Pearson similarity**:<br />![A1-small-Ex2.png](.readme/A1-small-Ex2.png)
-* Find recommended movies for user **Mike** using **Item-based filtering**:<br />![A1-small-Ex3.png](.readme/A1-small-Ex3.png)
+```bash
+cd backend
+uv sync
+uv run flask --app app run --debug --port 5001
+```
 
-## Test cases – large dataset
+Then open <http://localhost:5001>.
 
-Here are some test cases for the larger dataset you can use to verify that your system works correctly.
+With Docker:
 
-* Find recommended movies for user **Angela** using **Euclidean distance**:<br />![A1-Ex1.png](.readme/A1-Ex1.png)
-* Find recommended movies for user **Will** using **Pearson similarity**:<br />![A1-Ex2.png](.readme/A1-Ex2.png)
-* Find recommended movies for user **Andy** using **Item-based filtering**:<br />![A1-Ex3.png](.readme/A1-Ex3.png)
+```bash
+docker build -t movie-recommender .
+docker run --rm -p 8000:8000 movie-recommender
+```
+
+Then open <http://localhost:8000>.
+
+## API
+
+| Endpoint | Description |
+|---|---|
+| `GET /api/users` | All users |
+| `GET /api/users/<id>/similarusers?algorithm=euclidean\|pearson` | Users ranked by similarity |
+| `GET /api/users/<id>/recommendations?algorithm=euclidean\|pearson` | Movies ranked by predicted score |
+
+## Dataset
+
+The app uses the [MovieLens](https://grouplens.org/datasets/movielens/) `ml-latest-small` dataset (610 users, 9,742 movies, 100,836 ratings), converted to a semicolon-separated format. MovieLens users are anonymous, so the user names are randomly generated.
+
+> F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. *ACM Transactions on Interactive Intelligent Systems (TiiS)* 5, 4: 19:1–19:19. <https://doi.org/10.1145/2827872>
+
+The dataset is provided by [GroupLens Research](https://grouplens.org) at the University of Minnesota and is used here for non-commercial purposes under its [usage license](https://files.grouplens.org/datasets/movielens/ml-latest-small-README.html). This project is not endorsed by GroupLens or the University of Minnesota.
