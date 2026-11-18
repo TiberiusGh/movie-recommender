@@ -85,5 +85,32 @@ async function search(event) {
   }
 }
 
+function logConsoleGreeting() {
+  const styles = getComputedStyle(document.documentElement)
+  const accent = styles.getPropertyValue('--color-accent').trim() || '#0d9488'
+  const sans =
+    styles.getPropertyValue('--font-sans').trim() || 'system-ui, sans-serif'
+
+  console.log(
+    '%cHi 👋',
+    `color: ${accent}; font-family: ${sans}; font-size: 15px; font-weight: 600;`
+  )
+
+  console.log(
+    '%cRecommendations are powered by MovieLens data and good old Euclidean distance and Pearson correlation.',
+    `color: ${accent}; font-family: ${sans}; font-size: 15px; font-weight: 600;`
+  )
+
+  console.log(
+    '%cNice that you noticed this message. Check out more of my work:',
+    `color: ${accent}; font-family: ${sans}; font-size: 15px; font-weight: 600;`
+  )
+
+  console.log('https://tiberiusgh.com')
+  console.log('https://github.com/TiberiusGh')
+  console.log('https://www.linkedin.com/in/tiberius-gh/')
+}
+
+logConsoleGreeting()
 searchForm.addEventListener('submit', search)
 loadUsers().catch((error) => showStatus(error.message, true))
