@@ -1,7 +1,7 @@
 import csv
 from pathlib import Path
 
-DATASET = "movies_example"
+DATASET = "movies_large"
 DATASET_FILEPATH = Path(__file__).resolve().parent.parent / "data" / DATASET
 
 def load_ratings():
