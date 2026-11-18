@@ -207,9 +207,11 @@ button {
   transition: background 120ms ease, transform 80ms ease;
 }
 
-button:hover:not(:disabled) {
-  background: var(--color-accent-hover);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  button:hover:not(:disabled) {
+    background: var(--color-accent-hover);
+    transform: translateY(-1px);
+  }
 }
 
 button:disabled {
@@ -327,12 +329,24 @@ footer p {
     margin-bottom: 1.5rem;
   }
 
-  select,
-  button {
-    width: 100%;
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 1.25rem;
   }
 
-  .field:first-child {
-    flex: 1 1 100%;
+  .field:first-child,
+  .controls button,
+  .status {
+    grid-column: 1 / -1;
+  }
+
+  select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .status:empty {
+    display: none;
   }
 }
