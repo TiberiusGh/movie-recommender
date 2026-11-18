@@ -87,8 +87,25 @@ h2 {
 .hero-lead {
   font-size: 1.25rem;
   color: var(--color-text-muted);
-  margin: 0;
+  margin: 0 0 1.5rem;
   max-width: var(--measure);
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.icon-link {
+  display: inline-flex;
+  color: var(--color-text);
+  transition: color 120ms ease;
+}
+
+.icon-link:hover {
+  color: var(--color-accent);
+  text-decoration: none;
 }
 
 .breadcrumb {
