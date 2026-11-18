@@ -220,7 +220,7 @@ button:disabled {
 .status {
   font-size: 0.95rem;
   color: var(--color-text-muted);
-  align-self: center;
+  line-height: 3rem;
 }
 
 .status.error {
